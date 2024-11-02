@@ -1,17 +1,17 @@
-const express = require("express");
+const express = require("express"); // import packages
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
-const app = express();
-const port = 3000;
+const app = express(); // create app
+const port = 3000; // define port
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors()); // allows for cross-origin requests
+app.use(bodyParser.json()); // parse JSON requests
 
-const read_users = async () => {
+const read_users = async () => { // read users from file
   let users = [];
   const usersFilePath = path.join(__dirname, "users.txt");
   try {
@@ -27,7 +27,7 @@ const read_users = async () => {
   return users;
 };
 
-app.post("/login", async (req, res) => {
+app.post("/login", async (req, res) => { // login route
   try {
     const { username, password } = req.body;
     let user = null;
@@ -36,7 +36,7 @@ app.post("/login", async (req, res) => {
     user = users.find((u) => u.username === username && u.password === password);
     if (user) {
       const token = jwt.sign({ username: user.username }, "your_secret_key", { expiresIn: "1h" });
-      res.status(200).send({ message: "User exists", token });
+      res.status(200).send({ message: "User found", token });
     } else {
       res.status(404).send({ message: "User not found" });
     }
@@ -46,7 +46,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/register", async (req, res) => { // register route
   try {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -62,7 +62,7 @@ app.post("/register", async (req, res) => {
 
     const newUser = { username, password };
     users.push(newUser);
-
+    const usersFilePath = path.join(__dirname, "users.txt"); // write user to file
     fs.appendFile(usersFilePath, `\n${username},${password}`, (err) => {
       if (err) {
         console.error("Error writing to users file:", err);
@@ -76,6 +76,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+app.listen(port, () => { // start server
   console.log(`Server is running on port ${port}`);
 });

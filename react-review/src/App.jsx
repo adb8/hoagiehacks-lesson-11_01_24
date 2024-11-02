@@ -9,24 +9,24 @@ function App() {
   const [show, setShow] = useState(true);
   const [quotes, setQuotes] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { // fetch quotes from API
     const fetchQuotes = async () => {
-      const response = await fetch("https://dummyjson.com/quotes");
+      const response = await fetch("https://dummyjson.com/quotes"); // fetch quotes from dummyjson API
       const data = await response.json();
       const quotes = data.quotes.slice(0, 3);
       console.log(quotes);
       setQuotes(quotes);
     };
-    fetchQuotes();
+    fetchQuotes(); // call fetchQuotes function
   }, []);
 
-  function changeText() {
-    if (text === "Hello World!") {
+  function changeText() { // change text function
+    if (text === "Hello world!") {
       setText("The text has been changed!");
     } else if (text === "The text has been changed!") {
       setText("The text has been changed again!");
     } else {
-      setText("Hello World!");
+      setText("Hello world!");
     }
   }
 
@@ -53,7 +53,7 @@ function App() {
             variant="contained"
             color="secondary"
             onClick={() => {
-              setShow(!show);
+              setShow(!show); // toggle show state variable
             }}>
             Toggle element
           </Button>

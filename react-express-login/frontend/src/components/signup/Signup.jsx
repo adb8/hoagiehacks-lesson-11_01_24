@@ -7,8 +7,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSignup = async () => {
-    if (password !== confirmPassword) {
+  const handleSignup = async () => { // signup function
+    if (password !== confirmPassword) { // check if passwords match
       console.log("Passwords do not match");
       return;
     }

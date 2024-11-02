@@ -6,7 +6,7 @@ import Signup from "../signup/Signup";
 function AuthPage() {
   const [tab, setTab] = useState(0);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = (event, newValue) => { // handle tab change
     setTab(newValue);
   };
 

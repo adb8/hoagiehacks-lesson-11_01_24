@@ -6,15 +6,10 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = async () => { // login function
     try {
       const response = await axios.post("http://localhost:3000/login", { username, password });
       console.log("Login successful:", response.data);
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("username", username);
-        window.location.href = "/dashboard";
-      }
     } catch (error) {
       console.error("Login error:", error);
     }
