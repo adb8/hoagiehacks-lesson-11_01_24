@@ -27,17 +27,6 @@ const read_users = async () => {
   return users;
 };
 
-app.post("/area", (req, res) => {
-  try {
-    const { length, width } = req.body;
-    const area = length * width;
-    res.status(200).send({ area });
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).send({ message: "Internal server error" });
-  }
-});
-
 app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
